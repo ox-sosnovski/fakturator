@@ -1,42 +1,42 @@
-import js from '@eslint/js';
-import prettier from 'eslint-plugin-prettier';
-import react from 'eslint-plugin-react';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
-import nestjs from 'eslint-plugin-nestjs';
+import js from '@eslint/js'
+import prettier from 'eslint-plugin-prettier'
+import react from 'eslint-plugin-react'
+import typescriptEslint from '@typescript-eslint/eslint-plugin'
+import tsParser from '@typescript-eslint/parser'
+import nestjs from 'eslint-plugin-nestjs'
 
 export default [
   js.configs.recommended,
   {
-    ignores: ['node_modules', 'dist', '.turbo', 'build/**/*.js', '**/public/'],
+    ignores: ['node_modules', 'dist', '.turbo', 'build/**/*.js', '**/public/']
   },
   {
     plugins: {
-      prettier,
+      prettier
     },
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'module',
+      sourceType: 'module'
     },
     rules: {
-      semi: ['error', 'always'],
+      semi: ['error', 'never'],
       indent: 'off',
       eqeqeq: 'off',
       'prettier/prettier': [
         'error',
         {
           endOfLine: 'auto',
-          semi: true,
+          semi: false,
           singleQuote: true,
-          trailingComma: 'all',
-          tabWidth: 2,
-        },
+          trailingComma: 'none',
+          tabWidth: 2
+        }
       ],
       'multiline-ternary': 'off',
       'no-multiple-empty-lines': 'off',
       'no-console': 'warn',
       'no-undef': 'off',
-      'comma-dangle': ['warn', 'always-multiline'],
+      'comma-dangle': ['error', 'never'],
       'space-before-function-paren': 'off',
       'max-len': [
         'error',
@@ -46,10 +46,10 @@ export default [
           ignoreComments: true,
           ignoreStrings: true,
           ignoreTemplateLiterals: true,
-          ignoreUrls: true,
-        },
-      ],
-    },
+          ignoreUrls: true
+        }
+      ]
+    }
   },
   // NEXT.JS (CLIENT)
   {
@@ -57,17 +57,17 @@ export default [
     plugins: {
       react,
       '@typescript-eslint': typescriptEslint,
-      prettier,
+      prettier
     },
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 'latest',
-      sourceType: 'module',
+      sourceType: 'module'
     },
     settings: {
       react: {
-        version: '19.0.0',
-      },
+        version: '19.0.0'
+      }
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
@@ -75,8 +75,8 @@ export default [
       'react-hooks/exhaustive-deps': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-expressions': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-    },
+      '@typescript-eslint/no-unused-vars': 'warn'
+    }
   },
   // NESTJS (SERVER)
   {
@@ -84,16 +84,24 @@ export default [
     plugins: {
       '@typescript-eslint': typescriptEslint,
       nestjs,
-      prettier,
+      prettier
     },
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 'latest',
-      sourceType: 'module',
+      sourceType: 'module'
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
-    },
-  },
-];
+      '@typescript-eslint/no-explicit-any': [
+        'warn',
+        {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: true,
+          varsIgnorePattern: '^_'
+        }
+      ],
+      '@typescript-eslint/no-unused-vars': 'warn'
+    }
+  }
+]
