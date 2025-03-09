@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+pnpm-debug.log*
+.pnpm-store/
+
+# Build artifacts
+dist/
+build/
+.next/
+*.log
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env*.local
+
+# WebStorm/IntelliJ
+.idea/
+*.iml
+/httpRequests/
+dataSources/
+dataSources.local.xml
+workspace.xml
